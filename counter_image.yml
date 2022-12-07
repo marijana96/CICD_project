@@ -1,0 +1,11 @@
+- hosts: ansible
+  tasks: 
+  - name: create docker images
+    command: docker build -t counter:latest .
+    args: 
+     chdir: /opt/docker
+  - name: create tag to push image onto dockerhub
+    command: docker tag counter:latest marijana96/counter:latest
+
+  - name: push docker image 
+    command: docker push marijana96/counter:latest

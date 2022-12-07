@@ -1,0 +1,16 @@
+- hosts: dockerhost
+  tasks:
+    - name: stop existing container
+      command: docker stop counter-server
+      ignore_errors: yes
+    - name: remove existing container
+      command: docker rm counter-server
+      ignore_errors: yes
+
+    - name: remove existing image
+      command: docker rmi marijana96/counter:latest 
+      ignore_errors: yes
+
+    - name: create container
+      command: docker run -d --name counter-server -p 8082:8080 marijana96/counter:latest
+      ignore_errors: yes
